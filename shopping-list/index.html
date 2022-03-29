@@ -21,7 +21,28 @@
     </header>    
     <button id="logout">Logout</button>
     <main>
-        <h1>You are logged in!</h1>
+        <form id="item-form">
+            <input type="number" name="quantity" placeholder="Qty." id="quantity-input">
+            <input type="text" name="item" placeholder="Name of item" id="item-input">
+            <button>Submit</button>
+        </form>
+        <div id="shopping-list-container">
+            <h1>Enter an item to start your list</h1>
+            <div class="item">
+                <input type="checkbox" name="checkbox" class="checkbox">
+                <input type="number" name="edit-quantity" class="edit-quantity"></input>
+                <p class="item-name" contenteditable="">This is a shopping list item</p>
+                <div class="buy-delete-item">
+                    <button>Buy</button>
+                    <button>Delete</button>
+                </div>
+            </div>
+            <div id="buy-undo-all">
+                <button id="buy-all">Buy All</button>
+                <button id="undo-all">Undo All</button>
+            </div>
+            <button id="delete-all">Delete All</button>
+        </div>
     </main>
     <footer>
         <div class="copy gutter-right">&copy; 2021 Alchemy Code Lab</div>
