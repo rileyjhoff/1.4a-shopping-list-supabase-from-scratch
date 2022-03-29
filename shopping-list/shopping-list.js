@@ -2,18 +2,22 @@ import {
     checkAuth, 
     logout,
     createItem,
+    getItems,
     // deleteAllItems,
     // deleteItem,
-    // updateItem,
-    // getItems
+    // updateItem
 } from '../fetch-utils.js';
-import {
-    // renderItem,
-    // renderBuyUndoAllButtons,
-    // renderDeleteButton
-} from '../render-utils.js';
+import { renderItem } from '../render-utils.js';
 
 const form = document.getElementById('item-form');
+const listHeader = document.getElementById('list-header');
+const listContainer = document.getElementById('shopping-list-container');
+
+checkAuth();
+
+window.addEventListener('load', () => {
+    fetchAndDisplayList();
+});
 
 form.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -24,13 +28,24 @@ form.addEventListener('submit', async (e) => {
         bought: false
     };
     await createItem(item);
+    fetchAndDisplayList();
     form.reset();
 });
-
-checkAuth();
 
 const logoutButton = document.getElementById('logout');
 
 logoutButton.addEventListener('click', () => {
     logout();
 });
+
+async function fetchAndDisplayList() {
+    listContainer.textContent = '';
+    const list = await getItems();
+    if (list.length > 0) {
+        listHeader.textContent = 'Shopping List:';
+    }
+    for (let item of list) {
+        const itemDiv = renderItem(item);
+        listContainer.append(itemDiv);
+    }
+}

@@ -10,7 +10,7 @@
 
 export function renderItem(item) {
     const itemDiv = document.createElement('div');
-    const checkboxEl = document.createElement('input').type();
+    const checkboxEl = document.createElement('input');
     const quantityEl = document.createElement('input');
     const itemEl = document.createElement('p');
     const buttonDiv = document.createElement('div');
@@ -36,7 +36,7 @@ export function renderItem(item) {
         buyUndoButton.textContent = 'Buy';
     }
 
-    quantityEl.textContent = item.quantity;
+    quantityEl.value = item.quantity;
     itemEl.textContent = item.item;
     deleteButton.textContent = 'Delete';
 
