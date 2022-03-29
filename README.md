@@ -139,3 +139,21 @@ Additional considerations:
   - updates all checked items that have been bought as not bought in supabase
   - clears container
   - fetches, render and appends all of the user's shopping list items
+
+## Order
+
+1. supabase CRUD functions
+2. hard code HTML
+3. write render function
+4. write form event listener
+    1. write fetchAndDisplayList function
+5. write on load event listener
+6. write bought/undo button event listener
+7. write delete all button event listener
+8. write quantity change event listener
+9. write delete item event listener
+10. write edit item name event listener
+11. write checkbox click event listener
+    1. write buy all event listener
+    2. write undo all event listener
+12. stretch goals
