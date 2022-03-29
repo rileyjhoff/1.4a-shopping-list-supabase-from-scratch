@@ -89,3 +89,53 @@ Additional considerations:
     - only renders when a bought item is checked
   - a delete all button (not in wireframes) - appended below the buy all/undo all buttons
     - user needs to confirm before deleting all
+
+## Events
+
+- on submitting new shopping list item via the form
+  - add new shopping list item to supabase table
+  - clear out shopping list container, fetches, render and appends all of the user's shopping list items
+  - render and append all of the user's shopping list items
+- on load, display user's shopping list
+  - fetch user data from supabase
+  - render and append all of the user's shopping list items
+- on clicking bought button
+  - updates item as bought in supabase
+  - clears container
+  - fetches, render and appends all of the user's shopping list items
+    - bought items render differently (crossed out text)
+- on clicking undo button (which was the bought button before)
+  - updates item as NOT bought in supabase
+  - clears container
+  - fetches, render and appends all of the user's shopping list items
+    - bought items render differently (crossed out text)
+- on edits item name text
+  - updates item name in supabase
+  - clears container
+  - fetches, render and appends all of the user's shopping list items
+- on change of item quantity via dropdown
+  - updates item quantity in supabase
+  - clears container
+  - fetches, render and appends all of the user's shopping list items
+- on delete item button
+  - deletes item in supabase
+  - clears container
+  - fetches, render and appends all of the user's shopping list items
+- on checkbox click
+  - if item is bought
+    - render and append the buy all button at the bottom of shopping list (above delete button)
+  - if item is not bought
+    - render and append the buy all button at the bottom of shopping list (above delete button)
+- on delete all button click
+  - deletes all items in supabase
+  - clears container
+  - fetches, render and appends all of the user's shopping list items (none)
+- on buy all button click
+  - updates all checked items that have not been bought as bought in supabase
+  - clears container
+  - fetches, render and appends all of the user's shopping list items
+    - bought items render differently (crossed out text)
+- on under all button click
+  - updates all checked items that have been bought as not bought in supabase
+  - clears container
+  - fetches, render and appends all of the user's shopping list items
