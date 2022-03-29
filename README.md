@@ -64,3 +64,28 @@ Additional considerations:
 # Plan
 
 ![wireframes](/assets/wireframes.png)
+
+## HTML
+
+- hard coded:
+  - section to hold everything
+  - shopping list item form
+    - either a dropdown or input for quantity
+    - input for item name
+    - submit button
+  - div to render and append shopping list items
+    - some default text like "add shopping list items to begin"
+- dynamic:
+  - shopping list item div
+    - checkbox
+    - div
+      - quantity dropdown (which can edit the item in supabase)
+      - delete item button or link (ideally can just be a link)
+      - shopping list item in a p tag (editable)
+      - buy/bought button
+  - buy all button
+    - only renders when an unbought item is checked
+  - under all button
+    - only renders when a bought item is checked
+  - a delete all button (not in wireframes) - appended below the buy all/undo all buttons
+    - user needs to confirm before deleting all
