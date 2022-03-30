@@ -10,7 +10,6 @@ import {
     updateQuantity,
     updateChecked,
     updateItemName,
-    updateItem,
     buyAllItems,
     undoBuyAllItems
 } from '../fetch-utils.js';
@@ -24,6 +23,7 @@ const deleteAllButton = document.getElementById('delete-all');
 const buyUndoAllContainer = document.getElementById('buy-undo-all');
 const buyAllButton = document.getElementById('buy-all');
 const undoAllButton = document.getElementById('undo-all');
+const loadingSpinner = document.getElementById('loading-screen');
 
 checkAuth();
 
@@ -45,34 +45,40 @@ form.addEventListener('submit', async (e) => {
     form.reset();
 });
 
-// event listener for buying, undoing buyItem, and deleting an item from the list
+// event listener for all button clicks
 document.addEventListener('click', async (e) => {
     // console.log(e.path[0]);
+    // buy button for a single item - updates item as bought in supabase
     if (e.target.id === 'buy') {
         const itemId = e.path[2].id;
         await buyItem(itemId);
         fetchAndDisplayList();
     }
+    // undo button for a single item - updates item as NOT bought in supabase
     if (e.target.id === 'undo') {
         const itemId = e.path[2].id;
         await undoBuyItem(itemId);
         fetchAndDisplayList();
     }
+    // delete button for a single item - deletes item in supabase
     if (e.target.id === 'delete') {
         const itemId = e.path[2].id;
         await deleteItem(itemId);
         fetchAndDisplayList();
     }
+    // delete ALL button - deletes all items in supabase for the user
     if (e.target.id === 'delete-all') {
         if (confirm('Are you sure you want to delete all items from your list?')) {
             await deleteAllItems();
             fetchAndDisplayList();
         }
     }
+    // buy ALL button - buys all items that are NOT bought && checked
     if (e.target.id === 'buy-all') {
         await buyAllItems();
         fetchAndDisplayList();
     }
+    // undo ALL button - unbuys all items that are bought && checked
     if (e.target.id === 'undo-all') {
         await undoBuyAllItems();
         fetchAndDisplayList();
@@ -91,12 +97,13 @@ document.addEventListener('click', async (e) => {
 });
 
 document.addEventListener('change', async (e) => {
-    // console.log(e);
+    // updates item quantity in supabase but doesnt rerender everything (too much loading)
     if (e.target.className === 'edit-quantity') {
         const itemId = e.path[1].id;
         const newQuantity = e.path[0].value;
         await updateQuantity(itemId, newQuantity);
     }
+    // updates whether or not the item is checked in supabase
     if (e.target.className === 'checkbox') {
         const itemId = e.path[1].id;
         const isChecked = e.path[0].checked;
@@ -105,31 +112,6 @@ document.addEventListener('change', async (e) => {
     }
 });
 
-//     const checkboxes = document.querySelectorAll('.checkbox');
-//     console.log(checkboxes);
-//     const div = document.createElement('div');
-//     for (let checkbox of checkboxes) {
-//         console.log(checkbox.checked);
-//         console.log(checkbox.parentElement.className);
-//     }
-//     if (e.path[1].className === 'item bought') {
-//         console.log('working for undo all');
-//     } if (e.path[1].className === 'item') {
-//         console.log('working for buy');
-//     }
-
-// document.addEventListener('focus', async (e) => {
-//     console.log(e.target.path[0].value);
-//     document.addEventListener('input', () => {
-//         console.log();
-//     });
-    // if (e.path[0].className === 'edit-quantity') {
-    //     const itemId = e.path[1].id;
-    //     const newQuantity = e.path[0].value;
-    //     await updateQuantity(itemId, newQuantity);
-    // }
-// });
-
 const logoutButton = document.getElementById('logout');
 
 logoutButton.addEventListener('click', () => {
@@ -137,6 +119,7 @@ logoutButton.addEventListener('click', () => {
 });
 
 async function fetchAndDisplayList() {
+    loadingSpinner.classList.toggle('invisible');
     listContainer.textContent = '';
     const list = await getItems();
     for (let item of list) {
@@ -179,4 +162,5 @@ async function fetchAndDisplayList() {
     } else {
         undoAllButton.classList.add('hide');
     }
+    loadingSpinner.classList.toggle('invisible');
 }
