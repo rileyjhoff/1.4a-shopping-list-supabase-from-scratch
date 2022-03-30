@@ -47,6 +47,15 @@ export async function updateQuantity(id, quantity) {
     return checkError(response);
 }
 
+export async function updateItemName(id, item) {
+    const response = await client
+        .from('shopping_list')
+        .update({ item })
+        .match({ id });
+
+    return checkError(response);
+}
+
 export async function updateItem(item) {
     const response = await client
         .from('shopping_list')

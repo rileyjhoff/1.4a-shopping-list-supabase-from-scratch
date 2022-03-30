@@ -8,6 +8,7 @@ import {
     deleteAllItems,
     deleteItem,
     updateQuantity,
+    updateItemName,
     // updateItem
 } from '../fetch-utils.js';
 import { renderDeleteButton, renderItem } from '../render-utils.js';
@@ -37,7 +38,7 @@ form.addEventListener('submit', async (e) => {
 
 // event listener for buying, undoing buyItem, and deleting an item from the list
 document.addEventListener('click', async (e) => {
-    // console.log(e);
+    console.log(e.path[0]);
     if (e.target.id === 'buy') {
         const itemId = e.path[2].id;
         await buyItem(itemId);
@@ -59,15 +60,38 @@ document.addEventListener('click', async (e) => {
             fetchAndDisplayList();
         }
     }
+    // if (e.path[0].className === 'item-name') {
+    //     // const 
+    //     let itemBeingEdited = e;
+    //     let itemName = itemBeingEdited.path[0].textContent;
+    //     document.addEventListener('click', async (e) => {
+    //         if (e !== itemBeingEdited) {
+    //             itemName = itemBeingEdited.path[0].textContent;
+    //             console.log(itemName);
+    //         }
+    //     });
+    // }
 });
 
 document.addEventListener('change', async (e) => {
-    console.log(e.path[1].id);
+    console.log(e);
     if (e.path[0].className === 'edit-quantity') {
         const itemId = e.path[1].id;
         const newQuantity = e.path[0].value;
         await updateQuantity(itemId, newQuantity);
     }
+});
+
+document.addEventListener('focus', async (e) => {
+    console.log(e.target.path[0].value);
+    document.addEventListener('input', () => {
+        console.log();
+    });
+    // if (e.path[0].className === 'edit-quantity') {
+    //     const itemId = e.path[1].id;
+    //     const newQuantity = e.path[0].value;
+    //     await updateQuantity(itemId, newQuantity);
+    // }
 });
 
 const logoutButton = document.getElementById('logout');
