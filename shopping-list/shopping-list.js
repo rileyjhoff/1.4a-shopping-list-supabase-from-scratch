@@ -163,7 +163,8 @@ async function fetchAndDisplayList() {
                 const newName = e.target.textContent;
                 if (oldName !== newName) {
                     await updateItemName(itemId, newName);
-                    fetchAndDisplayList();
+                    listContainer.textContent = '';
+                    await fetchAndDisplayList();
                 }
             });
         });
