@@ -27,6 +27,8 @@ const loadingSpinner = document.getElementById('loading-screen');
 
 checkAuth();
 
+let editableNames = [];
+
 window.addEventListener('load', () => {
     fetchAndDisplayList();
 });
@@ -83,6 +85,17 @@ document.addEventListener('click', async (e) => {
         await undoBuyAllItems();
         fetchAndDisplayList();
     }
+    // if (e.target.className === 'item-name') {
+    //     const itemBeingEdited = e.target;
+    //     console.log(itemBeingEdited);
+    //     const input = document.createElement('input');
+    //     input.value = itemBeingEdited.textContent;
+    //     itemBeingEdited.textContent = '';
+    //     itemBeingEdited.append(input);
+    //     const itemId = e.path[1].id;
+    //     const newName = e.target.textContent;
+    //     console.log(itemId, newName);
+    // }
     // if (e.path[0].className === 'item-name') {
     //     // const 
     //     let itemBeingEdited = e;
@@ -96,7 +109,36 @@ document.addEventListener('click', async (e) => {
     // }
 });
 
+document.addEventListener('focus', async (e) => {
+    console.log('hi');
+    if (e.target.className === 'item-name') {
+        const itemId = e.path[1].id;
+        const newName = e.target.textContent;
+        let item = {
+            id: itemId,
+            item: newName
+        };
+        console.log(item, itemId, newName);
+        // e.target.addEventListener('blur', async (e) => {
+        //     console.log(item);
+        // });
+    }
+});
+
+// document.addEventListener('input', async (e) => {
+//     if (e.target.className === 'item-name') {
+//         const itemId = e.path[1].id;
+//         const newName = e.target.textContent;
+//         let item = {
+//             id: itemId,
+//             item: newName
+//         };
+//         console.log(item, itemId, newName);
+//     }
+// });
+
 document.addEventListener('change', async (e) => {
+    console.log(e);
     // updates item quantity in supabase but doesnt rerender everything (too much loading)
     if (e.target.className === 'edit-quantity') {
         const itemId = e.path[1].id;
@@ -161,6 +203,20 @@ async function fetchAndDisplayList() {
         undoAllButton.classList.remove('hide');
     } else {
         undoAllButton.classList.add('hide');
+    }
+    editableNames = document.querySelectorAll('.item-name');
+    for (let name of editableNames) {
+        name.addEventListener('focus', async (e) => {
+            const oldName = e.target.textContent;
+            name.addEventListener('blur', async (e) => {
+                const itemId = e.path[1].id;
+                const newName = e.target.textContent;
+                if (oldName !== newName) {
+                    updateItemName(itemId, newName);
+                    fetchAndDisplayList();
+                }
+            });
+        });
     }
     loadingSpinner.classList.toggle('invisible');
 }
