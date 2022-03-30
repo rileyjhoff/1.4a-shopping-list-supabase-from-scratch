@@ -5,11 +5,11 @@ import {
     getItems,
     buyItem,
     undoBuyItem,
-    // deleteAllItems,
+    deleteAllItems,
     deleteItem,
     // updateItem
 } from '../fetch-utils.js';
-import { renderItem } from '../render-utils.js';
+import { renderDeleteButton, renderItem } from '../render-utils.js';
 
 const form = document.getElementById('item-form');
 const listHeader = document.getElementById('list-header');
@@ -52,6 +52,12 @@ document.addEventListener('click', async (e) => {
         await deleteItem(itemId);
         fetchAndDisplayList();
     }
+    if (e.target.id === 'delete-all') {
+        if (confirm('Are you sure you want to delete all items from your list?')) {
+            await deleteAllItems();
+            fetchAndDisplayList();
+        }
+    }
 });
 
 const logoutButton = document.getElementById('logout');
@@ -63,12 +69,16 @@ logoutButton.addEventListener('click', () => {
 async function fetchAndDisplayList() {
     listContainer.textContent = '';
     const list = await getItems();
-    if (list.length > 0) {
-        listHeader.textContent = 'Shopping List:';
-    }
     for (let item of list) {
         const itemDiv = renderItem(item);
         itemDiv.id = item.id;
         listContainer.append(itemDiv);
+    }
+    if (list.length > 0) {
+        listHeader.textContent = 'Shopping List:';
+        const deleteAllButton = renderDeleteButton();
+        listContainer.appendChild(deleteAllButton);
+    } else {
+        listHeader.textContent = 'Enter an item to start your list';
     }
 }

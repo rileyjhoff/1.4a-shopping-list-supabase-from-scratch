@@ -59,7 +59,7 @@ export async function deleteItem(id) {
 export async function deleteAllItems() {
     const user = await getUser();
     const response = await client
-        .from('todos')
+        .from('shopping_list')
         .delete()
         .match({ user_id: user.id });
 
