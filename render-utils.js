@@ -36,6 +36,11 @@ export function renderItem(item) {
         buyUndoButton.textContent = 'Buy';
         buyUndoButton.id = 'buy';
     }
+    if (item.checked) {
+        checkboxEl.checked = true;
+    } else {
+        checkboxEl.checked = false;
+    }
 
     quantityEl.value = item.quantity;
     itemEl.textContent = item.item;
@@ -47,37 +52,36 @@ export function renderItem(item) {
     return itemDiv;
 }
 
-{/* <div id="buy-undo-all">
-    <button id="buy-all">Buy All</button>
-    <button id="undo-all">Undo All</button>
-</div> */}
+// {/* <div id="buy-undo-all">
+//     <button id="buy-all">Buy All</button>
+//     <button id="undo-all">Undo All</button>
+// </div> */}
 
-export function renderBuyUndoAllButtons() {
-    const div = document.createElement('div');
-    const buyAllButton = document.createElement('button');
-    const undoAllButton = document.createElement('button');
+// export function renderBuyUndoAllButtons(num) {
+//     const div = document.createElement('div');
+//     const buyAllButton = document.createElement('button');
+//     const undoAllButton = document.createElement('button');
 
-    div.id = 'buy-undo-all';
-    buyAllButton.id = 'buy-all';
-    undoAllButton.id = 'undo-all';
+//     div.id = 'buy-undo-all';
+//     buyAllButton.id = 'buy-all';
+//     undoAllButton.id = 'undo-all';
 
-    buyAllButton.textContent = 'Buy All';
-    undoAllButton.textContent = 'Undo All';
+//     buyAllButton.textContent = 'Buy All';
+//     undoAllButton.textContent = 'Undo All';
 
+//     div.append(buyAllButton, undoAllButton);
 
-    div.append(buyAllButton, undoAllButton);
+//     return div;
+// }
 
-    return div;
-}
+// {/* <button id="delete-all">Delete All</button> */}
 
-{/* <button id="delete-all">Delete All</button> */}
+// export function renderDeleteButton() {
+//     const button = document.createElement('button');
 
-export function renderDeleteButton() {
-    const button = document.createElement('button');
+//     button.id = 'delete-all';
 
-    button.id = 'delete-all';
-
-    button.textContent = 'Delete All';
+//     button.textContent = 'Delete All';
     
-    return button;
-}
+//     return button;
+// }

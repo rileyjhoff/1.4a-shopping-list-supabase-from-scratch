@@ -152,8 +152,8 @@ Additional considerations:
 7. write delete all button event listener
 8. write quantity change event listener
 9. write delete item event listener
-10. write edit item name event listener
-11. write checkbox click event listener
+10. write checkbox click event listener
     1. write buy all event listener
     2. write undo all event listener
+11. write edit item name event listener
 12. stretch goals

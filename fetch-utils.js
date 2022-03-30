@@ -29,11 +29,29 @@ export async function buyItem(id) {
     return checkError(response);
 }
 
+export async function buyAllItems() {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: true, checked: false })
+        .match({ bought: false, checked: true });
+
+    return checkError(response);
+}
+
 export async function undoBuyItem(id) {
     const response = await client
         .from('shopping_list')
         .update({ bought: false })
         .match({ id });
+    
+    return checkError(response);
+}
+
+export async function undoBuyAllItems() {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: false, checked: false })
+        .match({ bought: true, checked: true });
 
     return checkError(response);
 }
@@ -51,6 +69,15 @@ export async function updateItemName(id, item) {
     const response = await client
         .from('shopping_list')
         .update({ item })
+        .match({ id });
+
+    return checkError(response);
+}
+
+export async function updateChecked(id, checked) {
+    const response = await client
+        .from('shopping_list')
+        .update({ checked })
         .match({ id });
 
     return checkError(response);

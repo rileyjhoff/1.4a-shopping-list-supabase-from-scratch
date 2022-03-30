@@ -168,7 +168,6 @@ h1 {
 .item {
     display: flex;
     align-items: center;
-    /* justify-content: space-between; */
     width: 450px;
     margin: 5px;
 }
@@ -209,4 +208,8 @@ button {
 
 #buy-undo-all * {
     margin: 5px;
+}
+
+.hide {
+    display: none;
 }
