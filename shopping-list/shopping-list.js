@@ -109,34 +109,6 @@ document.addEventListener('click', async (e) => {
     // }
 });
 
-document.addEventListener('focus', async (e) => {
-    console.log('hi');
-    if (e.target.className === 'item-name') {
-        const itemId = e.path[1].id;
-        const newName = e.target.textContent;
-        let item = {
-            id: itemId,
-            item: newName
-        };
-        console.log(item, itemId, newName);
-        // e.target.addEventListener('blur', async (e) => {
-        //     console.log(item);
-        // });
-    }
-});
-
-// document.addEventListener('input', async (e) => {
-//     if (e.target.className === 'item-name') {
-//         const itemId = e.path[1].id;
-//         const newName = e.target.textContent;
-//         let item = {
-//             id: itemId,
-//             item: newName
-//         };
-//         console.log(item, itemId, newName);
-//     }
-// });
-
 document.addEventListener('change', async (e) => {
     console.log(e);
     // updates item quantity in supabase but doesnt rerender everything (too much loading)
@@ -204,6 +176,7 @@ async function fetchAndDisplayList() {
     } else {
         undoAllButton.classList.add('hide');
     }
+    // event listener to edit names
     editableNames = document.querySelectorAll('.item-name');
     for (let name of editableNames) {
         name.addEventListener('focus', async (e) => {
@@ -212,7 +185,7 @@ async function fetchAndDisplayList() {
                 const itemId = e.path[1].id;
                 const newName = e.target.textContent;
                 if (oldName !== newName) {
-                    updateItemName(itemId, newName);
+                    await updateItemName(itemId, newName);
                     fetchAndDisplayList();
                 }
             });
