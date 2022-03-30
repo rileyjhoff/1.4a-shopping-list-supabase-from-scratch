@@ -7,6 +7,7 @@ import {
     undoBuyItem,
     deleteAllItems,
     deleteItem,
+    updateQuantity,
     // updateItem
 } from '../fetch-utils.js';
 import { renderDeleteButton, renderItem } from '../render-utils.js';
@@ -36,7 +37,7 @@ form.addEventListener('submit', async (e) => {
 
 // event listener for buying, undoing buyItem, and deleting an item from the list
 document.addEventListener('click', async (e) => {
-    console.log(e);
+    // console.log(e);
     if (e.target.id === 'buy') {
         const itemId = e.path[2].id;
         await buyItem(itemId);
@@ -57,6 +58,15 @@ document.addEventListener('click', async (e) => {
             await deleteAllItems();
             fetchAndDisplayList();
         }
+    }
+});
+
+document.addEventListener('change', async (e) => {
+    console.log(e.path[1].id);
+    if (e.path[0].className === 'edit-quantity') {
+        const itemId = e.path[1].id;
+        const newQuantity = e.path[0].value;
+        await updateQuantity(itemId, newQuantity);
     }
 });
 

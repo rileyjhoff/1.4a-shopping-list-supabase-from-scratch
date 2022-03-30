@@ -38,6 +38,15 @@ export async function undoBuyItem(id) {
     return checkError(response);
 }
 
+export async function updateQuantity(id, quantity) {
+    const response = await client
+        .from('shopping_list')
+        .update({ quantity: quantity })
+        .match({ id });
+
+    return checkError(response);
+}
+
 export async function updateItem(item) {
     const response = await client
         .from('shopping_list')
