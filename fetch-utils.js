@@ -8,7 +8,6 @@ export async function createItem(item) {
         .from('shopping_list')
         .insert(item);
 
-
     return checkError(response);
 }
 
@@ -17,37 +16,33 @@ export async function getItems() {
         .from('shopping_list')
         .select('*')
         .order('id', { ascending: true });
-        
 
     return checkError(response);
 }
 
-// export async function buyItem(item) {
-//     const response = await client
-//         .from('shopping_list')
-//         .update(item)
-//         .match({ id: item.id });
-        
+export async function buyItem(id) {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: true })
+        .match({ id });
 
-//     return checkError(response);
-// }
+    return checkError(response);
+}
 
-// export async function undoBuyItem(item) {
-//     const response = await client
-//         .from('shopping_list')
-//         .update(item)
-//         .match({ id: item.id });
+export async function undoBuyItem(id) {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: false })
+        .match({ id });
 
-//     return checkError(response);
-// }
+    return checkError(response);
+}
 
-// updateItem is in place of buyItem(id)
 export async function updateItem(item) {
     const response = await client
         .from('shopping_list')
         .update(item)
         .match({ id: item.id });
-        
 
     return checkError(response);
 }
@@ -57,7 +52,6 @@ export async function deleteItem(id) {
         .from('shopping_list')
         .delete()
         .match({ id });
-        
 
     return checkError(response);
 }

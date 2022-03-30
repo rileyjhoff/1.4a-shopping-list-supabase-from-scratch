@@ -22,7 +22,6 @@ export function renderItem(item) {
     quantityEl.classList.add('edit-quantity');
     itemEl.classList.add('item-name');
     buttonDiv.classList.add('buy-delete-item');
-    buyUndoButton.id = 'buy-undo';
     deleteButton.id = 'delete';
     checkboxEl.type = 'checkbox';
     quantityEl.type = 'number';
@@ -31,9 +30,11 @@ export function renderItem(item) {
         buyUndoButton.textContent = 'Undo';
         itemDiv.classList.add('bought');
         itemEl.classList.add('line-through');
+        buyUndoButton.id = 'undo';
     } else {
         itemEl.contentEditable = true;
         buyUndoButton.textContent = 'Buy';
+        buyUndoButton.id = 'buy';
     }
 
     quantityEl.value = item.quantity;

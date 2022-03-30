@@ -3,8 +3,10 @@ import {
     logout,
     createItem,
     getItems,
+    buyItem,
+    undoBuyItem,
     // deleteAllItems,
-    // deleteItem,
+    deleteItem,
     // updateItem
 } from '../fetch-utils.js';
 import { renderItem } from '../render-utils.js';
@@ -32,6 +34,26 @@ form.addEventListener('submit', async (e) => {
     form.reset();
 });
 
+// event listener for buying, undoing buyItem, and deleting an item from the list
+document.addEventListener('click', async (e) => {
+    console.log(e);
+    if (e.target.id === 'buy') {
+        const itemId = e.path[2].id;
+        await buyItem(itemId);
+        fetchAndDisplayList();
+    }
+    if (e.target.id === 'undo') {
+        const itemId = e.path[2].id;
+        await undoBuyItem(itemId);
+        fetchAndDisplayList();
+    }
+    if (e.target.id === 'delete') {
+        const itemId = e.path[2].id;
+        await deleteItem(itemId);
+        fetchAndDisplayList();
+    }
+});
+
 const logoutButton = document.getElementById('logout');
 
 logoutButton.addEventListener('click', () => {
@@ -46,6 +68,7 @@ async function fetchAndDisplayList() {
     }
     for (let item of list) {
         const itemDiv = renderItem(item);
+        itemDiv.id = item.id;
         listContainer.append(itemDiv);
     }
 }
