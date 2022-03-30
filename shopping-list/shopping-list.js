@@ -49,7 +49,6 @@ form.addEventListener('submit', async (e) => {
 
 // event listener for all button clicks
 document.addEventListener('click', async (e) => {
-    // console.log(e.path[0]);
     // buy button for a single item - updates item as bought in supabase
     if (e.target.id === 'buy') {
         const itemId = e.path[2].id;
@@ -85,28 +84,6 @@ document.addEventListener('click', async (e) => {
         await undoBuyAllItems();
         fetchAndDisplayList();
     }
-    // if (e.target.className === 'item-name') {
-    //     const itemBeingEdited = e.target;
-    //     console.log(itemBeingEdited);
-    //     const input = document.createElement('input');
-    //     input.value = itemBeingEdited.textContent;
-    //     itemBeingEdited.textContent = '';
-    //     itemBeingEdited.append(input);
-    //     const itemId = e.path[1].id;
-    //     const newName = e.target.textContent;
-    //     console.log(itemId, newName);
-    // }
-    // if (e.path[0].className === 'item-name') {
-    //     // const 
-    //     let itemBeingEdited = e;
-    //     let itemName = itemBeingEdited.path[0].textContent;
-    //     document.addEventListener('click', async (e) => {
-    //         if (e !== itemBeingEdited) {
-    //             itemName = itemBeingEdited.path[0].textContent;
-    //             console.log(itemName);
-    //         }
-    //     });
-    // }
 });
 
 document.addEventListener('change', async (e) => {
@@ -146,7 +123,7 @@ async function fetchAndDisplayList() {
         deleteAllContainer.classList.remove('hide');
         deleteAllButton.classList.remove('hide');
     } else {
-        listHeader.textContent = 'Enter an item to start your list';
+        listHeader.textContent = 'Enter an item above to start your list';
         deleteAllContainer.classList.add('hide');
         deleteAllButton.classList.add('hide');
     }

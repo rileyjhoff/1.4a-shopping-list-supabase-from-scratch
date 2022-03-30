@@ -52,37 +52,3 @@ export function renderItem(item) {
 
     return itemDiv;
 }
-
-// {/* <div id="buy-undo-all">
-//     <button id="buy-all">Buy All</button>
-//     <button id="undo-all">Undo All</button>
-// </div> */}
-
-// export function renderBuyUndoAllButtons(num) {
-//     const div = document.createElement('div');
-//     const buyAllButton = document.createElement('button');
-//     const undoAllButton = document.createElement('button');
-
-//     div.id = 'buy-undo-all';
-//     buyAllButton.id = 'buy-all';
-//     undoAllButton.id = 'undo-all';
-
-//     buyAllButton.textContent = 'Buy All';
-//     undoAllButton.textContent = 'Undo All';
-
-//     div.append(buyAllButton, undoAllButton);
-
-//     return div;
-// }
-
-// {/* <button id="delete-all">Delete All</button> */}
-
-// export function renderDeleteButton() {
-//     const button = document.createElement('button');
-
-//     button.id = 'delete-all';
-
-//     button.textContent = 'Delete All';
-    
-//     return button;
-// }

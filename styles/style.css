@@ -151,7 +151,7 @@ footer {
 }
 
 main * {
-    border: 1px solid black;
+    /* border: 1px solid black; */
 }
 
 h1 {
@@ -170,6 +170,8 @@ h1 {
     align-items: center;
     width: 450px;
     margin: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
 }
 
 .item * {
@@ -184,13 +186,14 @@ h1 {
 .buy-delete-item {
     display: flex;
     flex-direction: column;
+    margin-left: auto;
 }
 
 .item-name {
     padding: 5px;
     font-size: 1.2rem;
     word-wrap: break-word;
-    width: 100%;
+    width: fit-content;
 }
 
 button {
@@ -236,4 +239,8 @@ button {
 
 .invisible {
     visibility: hidden;
+}
+
+.bought {
+    background-color: lightgreen;
 }
