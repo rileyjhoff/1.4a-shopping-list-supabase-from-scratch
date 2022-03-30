@@ -1,7 +1,115 @@
-const SUPABASE_URL = '';
-const SUPABASE_KEY = '';
+const SUPABASE_URL = 'https://zhmowgcybteqgiwwrxln.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpobW93Z2N5YnRlcWdpd3dyeGxuIiwicm9sZSI6ImFub24iLCJpYXQiOjE2NDc5OTQ2NjYsImV4cCI6MTk2MzU3MDY2Nn0.e8IeeowEcZ9C7aazuyONAepUhFvdOgDSLq8EKRJWwls';
 
 const client = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+export async function createItem(item) {
+    const response = await client
+        .from('shopping_list')
+        .insert(item);
+
+    return checkError(response);
+}
+
+export async function getItems() {
+    const response = await client
+        .from('shopping_list')
+        .select('*')
+        .order('id', { ascending: true });
+
+    return checkError(response);
+}
+
+export async function buyItem(id) {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: true })
+        .match({ id });
+
+    return checkError(response);
+}
+
+export async function buyAllItems() {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: true, checked: false })
+        .match({ bought: false, checked: true });
+
+    return checkError(response);
+}
+
+export async function undoBuyItem(id) {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: false })
+        .match({ id });
+    
+    return checkError(response);
+}
+
+export async function undoBuyAllItems() {
+    const response = await client
+        .from('shopping_list')
+        .update({ bought: false, checked: false })
+        .match({ bought: true, checked: true });
+
+    return checkError(response);
+}
+
+export async function updateQuantity(id, quantity) {
+    const response = await client
+        .from('shopping_list')
+        .update({ quantity: quantity })
+        .match({ id });
+
+    return checkError(response);
+}
+
+export async function updateItemName(id, item) {
+    const response = await client
+        .from('shopping_list')
+        .update({ item })
+        .match({ id });
+
+    return checkError(response);
+}
+
+export async function updateChecked(id, checked) {
+    const response = await client
+        .from('shopping_list')
+        .update({ checked })
+        .match({ id });
+
+    return checkError(response);
+}
+
+export async function updateItem(item) {
+    const response = await client
+        .from('shopping_list')
+        .update(item)
+        .match({ id: item.id });
+
+    return checkError(response);
+}
+
+export async function deleteItem(id) {
+    const response = await client
+        .from('shopping_list')
+        .delete()
+        .match({ id });
+
+    return checkError(response);
+}
+
+export async function deleteAllItems() {
+    const user = await getUser();
+    const response = await client
+        .from('shopping_list')
+        .delete()
+        .match({ user_id: user.id });
+
+    return checkError(response);
+}
 
 export function getUser() {
     return client.auth.session() && client.auth.session().user;
@@ -15,7 +123,7 @@ export function checkAuth() {
 
 export function redirectIfLoggedIn() {
     if (getUser()) {
-        location.replace('./other-page');
+        location.replace('./shopping-list');
     }
 }
 
@@ -37,6 +145,6 @@ export async function logout() {
     return (window.location.href = '../');
 }
 
-// function checkError({ data, error }) {
-//     return error ? console.error(error) : data;
-// }
+function checkError({ data, error }) {
+    return error ? console.error(error) : data;
+}

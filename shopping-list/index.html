@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script defer src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Titillium+Web:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/reset.css">
+    <link rel="stylesheet" href="../styles/style.css">
+    <link rel="stylesheet" href="../styles/home.css">
+    <title>Shopping List</title>
+</head>
+
+<body>
+    <div class="invisible" id="loading-screen">
+        <p id="loading-text">Loading...</p>
+    </div>
+    <header>
+        <div class="gutter-right logo">
+            <img src="../assets/big-logo.png" />
+        </div>
+    </header>    
+    <button id="logout">Logout</button>
+    <main>
+        <form id="item-form">
+            <input type="number" name="quantity" placeholder="Qty." id="quantity-input">
+            <input type="text" name="item" placeholder="Name of item" id="item-input">
+            <button>Submit</button>
+        </form>
+        <h1 id="list-header">Enter an item above to start your list</h1>
+        <div id="shopping-list-container">
+            <div class="item">
+                <input type="checkbox" name="checkbox" class="checkbox">
+                <input type="number" name="edit-quantity" class="edit-quantity"></input>
+                <p class="item-name" contenteditable="true">This is a shopping list item</p>
+                <div class="buy-delete-item">
+                    <button id="buy-undo">Buy</button>
+                    <button id="delete">Delete</button>
+                </div>
+            </div>
+        </div>
+        <div class="hide" id="buy-undo-all">
+            <button class="hide" id="buy-all">Buy All</button>
+            <button class="hide" id="undo-all">Undo All</button>
+        </div>
+        <div id="delete-all-container">
+            <button id="delete-all">Delete All</button>
+        </div>
+    </main>
+    <footer>
+        <div class="copy gutter-right">&copy; 2022 Alchemy Code Lab</div>
+    </footer>
+    <script type="module" src="./shopping-list.js"></script>
+</body>
+
+</html>

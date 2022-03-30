@@ -20,6 +20,8 @@ body {
     
     font-family: 'Titillium Web', sans-serif;
     background-color: var(--color2);
+    display: flex;
+    flex-direction: column;
 }
 
 main {
@@ -28,6 +30,8 @@ main {
     justify-content: center;
     align-items: center;
     margin-bottom: calc(var(--footer-height));
+    width: 80%;
+    align-self: center;
 }
 
 section {
@@ -73,7 +77,7 @@ header img {
 p {
     margin: var(--gutter);
 }
-  
+
 footer {
     position: fixed;
     width: 100%;
@@ -85,10 +89,10 @@ footer {
     box-shadow: var(--shadow);
 }
 
-  
-  @keyframes pulse {
+
+@keyframes pulse {
     20% {
-      transform: rotate3d(-10, -10, -10, 50deg) scale(1.2);
+    transform: rotate3d(-10, -10, -10, 50deg) scale(1.2);
     }
 
     40% {
@@ -97,13 +101,13 @@ footer {
 
     60% {
         transform: rotate3d(-10, 10, 10, 50deg) scale(1.2);
-      }
+    }
 
     80% {
         transform: rotate3d(10, 10, 10, 50deg) scale(1);
     }
 
-  }
+}
 
 #logout {
     position: fixed;
@@ -128,4 +132,115 @@ footer {
 
 .auth-container button {
     margin: 10px;
+}
+
+#item-form {
+    padding: 20px;
+}
+
+#item-form * {
+    height: 40px;
+}
+
+#quantity-input {
+    width: 60px;
+}
+
+#item-input {
+    width: 200px;
+}
+
+main * {
+    /* border: 1px solid black; */
+}
+
+h1 {
+    margin: 5px 0;
+}
+
+#shopping-list-container {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.item {
+    display: flex;
+    align-items: center;
+    width: 450px;
+    margin: 5px;
+    border: 2px solid black;
+    border-radius: 5px;
+}
+
+.item * {
+    margin: 5px;
+}
+
+.edit-quantity {
+    height: 20px;
+    width: 45px;
+}
+
+.buy-delete-item {
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+}
+
+.item-name {
+    padding: 5px;
+    font-size: 1.2rem;
+    word-wrap: break-word;
+    width: fit-content;
+}
+
+button {
+    cursor: pointer;
+}
+
+#delete-all {
+    margin: 5px 5px 10px;
+}
+
+#buy-undo-all {
+    margin: 5px;
+    padding: 5px;
+}
+
+#buy-undo-all * {
+    margin: 5px;
+}
+
+.hide {
+    display: none;
+}
+
+.bought p, .bought input {
+    text-decoration: line-through;
+}
+
+#loading-screen {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.45);
+    width: 100%;
+    height: 100%;
+}
+
+#loading-text {
+    color:white;
+    font-size: 3rem;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.bought {
+    background-color: lightgreen;
 }
