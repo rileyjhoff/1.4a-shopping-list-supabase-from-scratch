@@ -31,6 +31,7 @@ export function renderItem(item) {
         itemDiv.classList.add('bought');
         itemEl.classList.add('line-through');
         buyUndoButton.id = 'undo';
+        quantityEl.disabled = true;
     } else {
         itemEl.contentEditable = true;
         buyUndoButton.textContent = 'Buy';
